@@ -3,12 +3,13 @@ import expressGraphQL from "express-graphql";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";
+import { MongoUrl } from './config'
 
 import schema from "./graphql/";
 
 const app = express();
 const PORT = process.env.PORT || "4000";
-const db = "mongodb://enbake:enbake123@ds113765.mlab.com:13765/ftinves";
+const db = MongoUrl;
 
 // Connect to MongoDB with Mongoose.
 mongoose
