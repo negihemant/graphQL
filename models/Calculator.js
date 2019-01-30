@@ -3,22 +3,21 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 // Create the User Schema.
-const UserSchema = new Schema({
-  id: {
+const CalculatorSchema = new Schema({
+  name: {
     type: String,
     required: true,
-    unique: true
   },
-  name: {
+  data: {
     type: String,
     required: true
   },
-  email: {
+  updatedBy: {
     type: String,
     required: true
   }
 });
 
-const User = mongoose.model("User", UserSchema);
+const Calculator = mongoose.model("NewModel", CalculatorSchema);
 
-export default User;
+export default Calculator;

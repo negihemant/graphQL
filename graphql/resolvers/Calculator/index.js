@@ -1,18 +1,18 @@
-// The User schema.
-import User from "../../../models/User";
+// The Calculator schema.
+import Calculator from "../../../models/Calculator";
 
 export default {
   Query: {
-    user: (root, args) => {
+    calculator: (root, args) => {
       return new Promise((resolve, reject) => {
-        User.findOne(args).exec((err, res) => {
+        Calculator.findOne(args).exec((err, res) => {
           err ? reject(err) : resolve(res);
         });
       });
     },
-    users: () => {
+    calculators: () => {
       return new Promise((resolve, reject) => {
-        User.find({})
+        Calculator.find({})
           .populate()
           .exec((err, res) => {
             err ? reject(err) : resolve(res);
@@ -21,27 +21,30 @@ export default {
     }
   },
   Mutation: {
-    addUser: (root, { id, name, email }) => {
-      const newUser = new User({ id, name, email });
+    addCalculator: (root, {  name, data, updatedBy }) => {
+      const newCalculator = new Calculator({ name, data, updatedBy });
 
       return new Promise((resolve, reject) => {
-        newUser.save((err, res) => {
+        newCalculator.save((err, res) => {
+          if(err)
+          console.log(err)
+          
           err ? reject(err) : resolve(res);
         });
       });
     },
-    editUser: (root, { id, name, email }) => {
+    editCalculator: (root, { name, data, updatedBy }) => {
       return new Promise((resolve, reject) => {
-        User.findOneAndUpdate({ id }, { $set: { name, email } }).exec(
+        Calculator.findOneAndUpdate({ name }, { $set: {  data, updatedBy } }).exec(
           (err, res) => {
             err ? reject(err) : resolve(res);
           }
         );
       });
     },
-    deleteUser: (root, args) => {
+    deleteCalculator: (root, args) => {
       return new Promise((resolve, reject) => {
-        User.findOneAndRemove(args).exec((err, res) => {
+        Calculator.findOneAndRemove(args).exec((err, res) => {
           err ? reject(err) : resolve(res);
         });
       });
